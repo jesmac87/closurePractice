@@ -9,11 +9,11 @@ var outer = function(){
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+var inner = outer();
 
 //Once you do that, invoke inner.
 
-  //Code Here
+inner();
 
 
 
@@ -32,7 +32,8 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+var friend1 = callFriend();
+friend1('435-215-9248');
 
 
 
@@ -44,7 +45,14 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-  //Code Here
+  var makeCounter = function () {
+    var count = 0;
+    
+    return function () {
+      console.log(count += 1);
+    }
+  };
+
   var count = makeCounter();
   count() // 1
   count() // 2
@@ -64,6 +72,53 @@ var callFriend = function(){
   After the function has been called N number of times, console.log('STAHHP');
 */
 
+//Closures store references to the outer function’s variables; they do not store the actual value. 
 
 
+//working copy
+var closureNightmare = function (func) {
+    var x = 0;
+    return function () {
+        if (x === 0) {
+            func();
+            x++;
+        } else {
+            console.log('error');
+        }
+    }
+}
 
+var consoleLog = function () {
+    console.log('yolo');
+};
+
+var oom = closureNightmare(consoleLog);
+
+oom();
+oom();
+
+// N
+var closureNightmare = function (func, N) {
+    var x = 0;
+    return function () {
+        if (x < N) {
+            func();
+            x++;
+        } else {
+            console.log('error');
+        }
+    }
+}
+
+var consoleLog = function () {
+    console.log('yolo');
+};
+
+var oom = closureNightmare(consoleLog, 5);
+
+oom();
+oom();
+oom();
+oom();
+oom();
+oom();
